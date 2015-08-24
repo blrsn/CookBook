@@ -26,7 +26,7 @@ class RecipesController < ApplicationController
   def update
     if @recipe.update(recipe_params)
       redirect_to @recipe
-      flash[:notice] = "Recipe updated successfully"
+      flash[:success] = "Recipe updated successfully"
     else
       flash.now[:danger] = "Please enter valid information"
       render "edit"
@@ -50,7 +50,7 @@ class RecipesController < ApplicationController
   end
   
   def recipe_params
-    params.require(:recipe).permit(:title,:description)
+    params.require(:recipe).permit(:title,:description,:image, ingredients_attributes: [:id, :name, :destroy], directions_attributes: [:id, :step, :destroy])
   end
   
 end
